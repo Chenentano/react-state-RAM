@@ -26,7 +26,7 @@ function App() {
         const data = await response.json();
         setCharacters(data.results);
       } catch (error) {
-        setError('Error fetching characters. Please try again later.');
+        setError("Error");
       }
     };
 
@@ -34,8 +34,8 @@ function App() {
   }, []);
 
   // schneller refresh
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const handleSearch = (element: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(element.target.value);
   };
 
   //filter den suchbegriff
