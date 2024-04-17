@@ -1,5 +1,6 @@
 
 import {useEffect, useState} from "react";
+import { response } from "./rickData.ts";
 
 interface Character {
   id: number;
@@ -11,14 +12,17 @@ interface Character {
 }
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // Wert für Suche
+  const [characters, setCharacters] = useState<Character[]>([]); //charliste
+  const [error, setError] = useState(''); // für die probleme
 
+  const { api_url } = response;
+
+  //rufe daten auf
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://rickandmortyapi.com/api/character/');
+        const response = await fetch(api_url);
         const data = await response.json();
         setCharacters(data.results);
       } catch (error) {
@@ -29,10 +33,12 @@ function App() {
     fetchData();
   }, []);
 
+  // schneller refresh
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
+  //filter den suchbegriff
   const filteredCharacters = characters.filter((character) =>
       character.name.toLowerCase().includes(searchTerm.toLowerCase())
   );

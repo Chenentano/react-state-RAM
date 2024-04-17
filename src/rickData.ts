@@ -1,1 +1,4 @@
-export const response = await fetch('https://rickandmortyapi.com/api/character/');
+
+export const response = {
+    api_url: "https://rickandmortyapi.com/api/character/"
+};
